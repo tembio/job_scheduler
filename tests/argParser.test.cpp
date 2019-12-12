@@ -84,4 +84,24 @@ TEST_F(ArgParserTest, TaskFilesReturnsVectorWithParsedFileNames){
   EXPECT_EQ(taskFiles[1], taskFilesRead[1]);
 }
 
+// taskToExecute
+
+TEST_F(ArgParserTest, TaskToExecuteReturnsEmptyStringIfParseHasNotBeenCalled){
+  auto taskRead = parser.taskToExecute();
+
+  EXPECT_EQ(std::string{}, taskRead);
+}
+
+TEST_F(ArgParserTest, TaskToExecuteNameOfTask){
+  const int argc = 3;
+  char taskFile[] = {"A.task"};
+  char* args[argc] = {executableName, taskToRun, taskFile};
+
+  parser.parse(argc,args);
+  
+  auto taskRead = parser.taskToExecute();
+
+  EXPECT_EQ(std::string{taskToRun}, taskRead);
+}
+
 }
