@@ -1,6 +1,8 @@
 #include "argParser.h"
 #include <iostream>
 
+namespace Scheduler{
+
 void ArgParser::parse(int argc, char* argv[]){
 	if(argc < 3)
 		throw std::runtime_error{"Invalid number of arguments"};
@@ -10,13 +12,22 @@ void ArgParser::parse(int argc, char* argv[]){
 	auto task = std::string{argv[1]};
 	bool taskFileFound = false;
 
-	for(auto arg = 2; arg < argc && !taskFileFound; arg++){
+	for(auto arg = 2; arg < argc; arg++){
 		auto file = std::string{argv[arg]};
-		if(file.find(task) != std::string::npos)
+		taskFiles_.push_back(file);
+
+		if(file.find(task) != std::string::npos){
 			taskFileFound = true;
+		}
 	}
 
 	if(!taskFileFound){
 		throw std::runtime_error{"Task file not found"};
 	}
+}
+
+std::vector<std::string> ArgParser::taskFiles(){
+	return taskFiles_;
+}
+
 }

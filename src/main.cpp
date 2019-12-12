@@ -1,5 +1,5 @@
 #include "argParser.h"
 
 int main(){
-	ArgParser parser;
+	Scheduler::ArgParser parser;
 }

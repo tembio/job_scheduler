@@ -1,6 +1,10 @@
 #include "gtest/gtest.h"
 #include "argParser.h"
 #include <string>
+#include <vector>
+
+
+namespace Scheduler{
 
 class ArgParserTest : public ::testing::Test {
   protected:
@@ -9,7 +13,7 @@ class ArgParserTest : public ::testing::Test {
     char taskToRun[10] = "A";
 };
 
-// Parse 
+// parse 
 
 TEST_F(ArgParserTest, ThrowsExceptionIfNumArgsIsLowerThan3){
   char* args[1];
@@ -56,4 +60,28 @@ TEST_F(ArgParserTest, DoesNotThrowExceptionIfCorrespondingTaskFileIsFound){
   char* args[argc] = {executableName, taskToRun, taskFiles[0], taskFiles[1]};
 
   EXPECT_NO_THROW(parser.parse(argc,args));
+}
+
+// taskFiles
+
+TEST_F(ArgParserTest, TaskFilesReturnsEmptyVectorIfParseHasNotBeenCalled){
+  auto taskFilesRead = parser.taskFiles();
+
+  EXPECT_EQ(std::vector<std::string>{}, taskFilesRead);
+}
+
+TEST_F(ArgParserTest, TaskFilesReturnsVectorWithParsedFileNames){
+  const int argc = 4;
+  char taskFiles[2][10] = {"A.task", "B.task"};
+  char* args[argc] = {executableName, taskToRun, taskFiles[0], taskFiles[1]};
+
+  parser.parse(argc,args);
+  
+  auto taskFilesRead = parser.taskFiles();
+
+  EXPECT_EQ(2, taskFilesRead.size());
+  EXPECT_EQ(taskFiles[0], taskFilesRead[0]);
+  EXPECT_EQ(taskFiles[1], taskFilesRead[1]);
+}
+
 }

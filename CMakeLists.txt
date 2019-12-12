@@ -24,7 +24,7 @@ if(GENERATE_TESTS)
 	include(GoogleTest)
 
 	add_executable(tests
-				   tests/argParser.cpp
+				   tests/argParser.test.cpp
 				   ${SOURCES})
 
     target_include_directories(tests PRIVATE ${SRC_DIR})
