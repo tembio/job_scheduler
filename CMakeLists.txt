@@ -8,7 +8,8 @@ set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
 set(SOURCES ${SRC_DIR}/task.cpp 
 			${SRC_DIR}/argParser.cpp
-			${SRC_DIR}/nativeCommandRunner.cpp)
+			${SRC_DIR}/nativeCommandRunner.cpp
+			${SRC_DIR}/jobScheduler.cpp)
 
 add_executable(main
 			   ${SRC_DIR}/main.cpp
@@ -34,6 +35,7 @@ if(GENERATE_TESTS)
 	add_executable(tests
 				   tests/argParser.test.cpp
 				   tests/task.test.cpp
+				   tests/jobScheduler.test.cpp
 				   ${SOURCES})
 
 	set_target_properties(tests PROPERTIES CXX_STANDARD 14)
