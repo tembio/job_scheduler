@@ -11,12 +11,12 @@ set(SOURCES ${SRC_DIR}/task.cpp
 			${SRC_DIR}/nativeCommandRunner.cpp
 			${SRC_DIR}/jobScheduler.cpp)
 
-add_executable(main
+add_executable(job_scheduler
 			   ${SRC_DIR}/main.cpp
 			   ${SOURCES}
 			   )
 
-set_target_properties(main PROPERTIES CXX_STANDARD 14)
+set_target_properties(job_scheduler PROPERTIES CXX_STANDARD 14)
 
 
 if(GENERATE_TESTS)
