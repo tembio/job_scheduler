@@ -1,5 +1,5 @@
 #include "argParser.h"
-#include <iostream>
+#include <stdexcept>
 
 namespace Scheduler{
 
