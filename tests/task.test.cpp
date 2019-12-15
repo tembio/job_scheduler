@@ -27,7 +27,7 @@ TEST_F(TaskTest, CtorThrowsExecptionWhitInvalidStream){
     FAIL();
   }
   catch(const std::runtime_error &e){
-    EXPECT_STREQ("Error reading task", e.what());
+    EXPECT_STREQ("Error reading task file", e.what());
   }
 }
 
@@ -63,7 +63,7 @@ TEST_F(TaskTest, DependenciesReturnsEmptyListWhenNoDepenecies){
 
 TEST_F(TaskTest, DependenciesReturnsListOfDepenecies){
   taskName = "A";
-  command = "command";
+  command = "command arg";
   dependencies = "B, C";
   std::stringstream taskContent;
   taskContent << taskName << "\n" 
@@ -82,7 +82,7 @@ TEST_F(TaskTest, DependenciesReturnsListOfDepenecies){
 
 TEST_F(TaskTest, RunExecutesCallsNativeCommand){
   taskName = "A";
-  command = "nativeCommand";
+  command = "nativeCommand arg";
   std::stringstream taskContent;
   taskContent << taskName << "\n" 
               << command  << "\n";

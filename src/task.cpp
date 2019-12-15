@@ -8,13 +8,12 @@ namespace Scheduler{
 
 Task::Task(std::istream &taskFile, std::shared_ptr<INativeCommandRunner> commandRunner){
     if(!taskFile) 
-      throw std::runtime_error{"Error reading task"};
+      throw std::runtime_error{"Error reading task file"};
     
+    std::getline(taskFile, name_);
+    std::getline(taskFile, command_);
+
     std::string dependency;
-
-    taskFile >> name_;
-    taskFile >> command_;
-
     while(taskFile >> dependency){
         auto endsInComma = dependency.size()>1 && dependency[dependency.size()-1]==',';
         if(endsInComma){
